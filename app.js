@@ -1,11 +1,9 @@
-const {readFile} = require('fs');
-console.log('starting the first task');
-readFile('./content/first.txt', 'utf8',(err,result)=>{
-    if(err){
-        console.log(err)
-        return
-    }
-    console.log(result)
-    console.log('completed first task')
+const EventEmitter = require('events');
+const customEmitter = new EventEmitter()
+customEmitter.on('response', ()=>{
+    console.log('Data received')
 })
-console.log('starting next task')
+customEmitter.on('response', (name,age)=>{
+    console.log(`Some data has been received by ${name} of ${age} year`)
+})
+customEmitter.emit('response','mark',34)
